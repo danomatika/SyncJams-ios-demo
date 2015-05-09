@@ -1,0 +1,6 @@
+[submodule "SyncJams"]
+	path = SyncJams
+	url = https://github.com/chr15m/SyncJams.git
+[submodule "libpd"]
+	path = libpd
+	url = https://github.com/libpd/libpd.git
