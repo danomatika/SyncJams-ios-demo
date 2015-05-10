@@ -20,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UISwitch *mytoggle1; // 0-1 (BOOL)
 
 @property (weak, nonatomic) IBOutlet UILabel *nodeLabel; // show current node-id
+@property (weak, nonatomic) IBOutlet UILabel *bpmLabel; // show current bpm
 @property (weak, nonatomic) IBOutlet UILabel *tickLabel; // show current tick count
 
 @end
@@ -45,6 +46,7 @@
 	
 	// receive node-id & current tick
 	[PdBase subscribe:@"node-id"];
+	[PdBase subscribe:@"bpm"];
 	[PdBase subscribe:@"tick"];
 }
 
@@ -96,6 +98,12 @@
 	// node-id sometimes comes as a float, sometimes as a list
 	else if([source isEqualToString:@"node-id"]) {
 		self.nodeLabel.text = [NSString stringWithFormat:@"%d", (int)received];
+		return;
+	}
+	
+	// current bpm value
+	else if([source isEqualToString:@"bpm"]) {
+		self.bpmLabel.text = [NSString stringWithFormat:@"%d", (int)received];
 		return;
 	}
 	
