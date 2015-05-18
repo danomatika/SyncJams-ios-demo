@@ -92,7 +92,7 @@
 		self.myslider2.value = received;
 	}
 	else if([source isEqualToString:@"/mytoggle/1/r"]) {
-		self.mytoggle1.on = received;
+		self.mytoggle1.on = (BOOL)received;
 	}
 	
 	// node-id sometimes comes as a float, sometimes as a list
@@ -134,15 +134,18 @@
 - (void)receiveMessage:(NSString *)message withArguments:(NSArray *)arguments fromSource:(NSString *)source {
 	
 	// receive set messages for each gui element
-	if([message isEqualToString:@"set"] && arguments.count > 1 && [arguments.firstObject isKindOfClass:[NSNumber class]]) {
+	if([message isEqualToString:@"set"] && arguments.count > 0 && [arguments.firstObject isKindOfClass:[NSNumber class]]) {
 		if([source isEqualToString:@"/myslider/1/r"]) {
 			self.myslider1.value = [arguments[0] floatValue];
+			return;
 		}
 		else if([source isEqualToString:@"/myslider/2/r"]) {
 			self.myslider2.value = [arguments[0] floatValue];
+			return;
 		}
 		else if([source isEqualToString:@"/mytoggle/1/r"]) {
 			self.mytoggle1.on = [arguments[0] boolValue];
+			return;
 		}
 	}
 	
